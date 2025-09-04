@@ -13,13 +13,13 @@ def print_summary(title, scores):
     print(' '.join(title))
     
     for team_name in sorted(scores):
-        print("  {}: {}".format(team_name, scores[team_name]))        
+        print(f"  {team_name}: {scores[team_name]}")        
         
 def write_to_csv(file_path, scores):
     with open(file_path, "w") as f:
         f.write("team,score\n")
         for team_name in sorted(scores):
-            f.write("{},{}\n".format(team_name, scores[team_name]))
+            f.write(f"{team_name},{scores[team_name]}\n")
             
 def print_podium(scores):
     print("Medal podium")
@@ -27,7 +27,7 @@ def print_podium(scores):
     sorted_scores = sorted(scores.items(), key=lambda item: item[1], reverse=True)
     for i in range(min(3, len(sorted_scores))):
         team_name = sorted_scores[i][0]
-        print("  {}".format(team_name))
+        print(f"  {team_name}")
 
 def run_with_file(input_file):
     scores = {}
@@ -47,7 +47,7 @@ def run_with_file(input_file):
         elif split_line[0] == "podium":
             print_podium(scores)
         else:
-            print("Unknown command ('{}')!".format(split_line[0]))
+            print(f"Unknown command ('{split_line[0]}')!")
 
 def main():
     if len(sys.argv) != 2:
