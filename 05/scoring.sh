@@ -72,6 +72,22 @@ for inp in "$@"; do
                     echo "  $( basename "$team_file" .txt ): $( paste -sd+ <"$team_file" | bc )" >>"$output_file"
                 done
                 ;;
+            podium)
+                echo "Medal podium" >>"$output_file"
+                final_scores="$( mktemp )"
+                for team_file in "$my_temp/"*.txt; do
+                    echo "  $( basename "$team_file" .txt ):$( paste -sd+ <"$team_file" | bc )" >>"$final_scores"
+                done
+                sort "$final_scores" -t ':' -k 2 -n -r | head -n 3 | cut -d ':' -f 1 >>"$output_file"
+                rm "$final_scores"
+                ;;
+            csv)
+                csv_file="$args"
+                echo "team,score" >>"$csv_file"
+                for team_file in "$my_temp/"*.txt; do
+                    echo "$( basename "$team_file" .txt ),$( paste -sd+ <"$team_file" | bc )" >>"$csv_file"
+                done
+                ;;
             *)
                 ;;
         esac

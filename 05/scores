@@ -6,7 +6,7 @@ add team-alpha task2 5
 add team-bravo task1 10
 add team-yankee task1 5
 summary After first week
-#csv week1.csv
+csv week1.csv
 add team-zulu task2 15
 summary End of tournament
-#podium
+podium
